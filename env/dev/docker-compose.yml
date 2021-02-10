@@ -1,0 +1,52 @@
+version: "3.7"
+services:
+
+  # БД
+  db:
+    image: postgres:12-alpine
+    container_name: db
+    hostname: db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_USER: barcodes
+      POSTGRES_PASSWORD: barcodes
+      POSTGRES_DB: barcodes
+      PGDATA: /var/lib/postgresql/data/barcodes
+    volumes:
+      - postgres-irk-buyers-club-barcodes:/var/lib/postgresql/data/barcodes
+    command: ["-c", "shared_buffers=256MB", "-c", "max_connections=200"]
+    networks:
+      - irk-buyers-club
+    healthcheck:
+      test: PGPASSWORD=barcodes psql -d barcodes -U barcodes -w -c '\q'
+      interval: 20s
+      timeout: 10s
+
+  # PgAdmin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "9090:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: barcodes@irk-buyers-club.ru
+      PGADMIN_DEFAULT_PASSWORD: barcodes
+    volumes:
+      - pgadmindata:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - db
+    networks:
+      - irk-buyers-club
+
+networks:
+  irk-buyers-club:
+    driver: bridge
+
+volumes:
+  postgres-irk-buyers-club-barcodes:
+    external: false
+  pgadmindata:
