@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="04" author="croacker">
+        <createTable tableName="product_category">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="05" author="croacker">
+        <loadData
+                file="db/changelog/rel-001/data/002-product-category.csv"
+                separator="\t"
+                tableName="product_category">
+            <column header="CategoryID"
+                    name="id"/>
+            <column header="CategoryName"
+                    name="name"/>
+            <column header="Count"
+                    name="count"
+                    type="skip"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
