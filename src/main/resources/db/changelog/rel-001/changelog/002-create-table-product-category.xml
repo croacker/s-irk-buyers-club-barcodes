@@ -17,15 +17,12 @@
     <changeSet id="05" author="croacker">
         <loadData
                 file="db/changelog/rel-001/data/002-product-category.csv"
-                separator="\t"
+                separator=";"
                 tableName="product_category">
             <column header="CategoryID"
                     name="id"/>
             <column header="CategoryName"
                     name="name"/>
-            <column header="Count"
-                    name="count"
-                    type="skip"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>
