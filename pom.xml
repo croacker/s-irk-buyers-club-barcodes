@@ -10,13 +10,17 @@
 	</parent>
 	<groupId>com.croacker.buyersclub</groupId>
 	<artifactId>irk-buyers-club-barcodes</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>irk-buyers-club-barcodes</name>
 	<description>Irkutsk buyer club barcodes service</description>
+
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
 		<kotlin.version>1.4.21</kotlin.version>
+		<docker.image.name>croacker/${name}:${version}</docker.image.name>
+		<jib-maven-plugin.version>2.7.1</jib-maven-plugin.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -140,5 +144,39 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>${jib-maven-plugin.version}</version>
+						<configuration>
+							<from>
+								<image>openjdk:14.0.1-jdk</image>
+							</from>
+							<to>
+								<image>${docker.image.name}</image>
+							</to>
+							<container>
+								<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+							</container>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>dockerBuild</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
