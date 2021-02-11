@@ -7,6 +7,6 @@ data class Product(
     val id: Long? = null,
     val barcode: String,
     val name: String,
-    val categoryId: String,
-    val brandId: String,
+    val categoryId: Long,
+    val brandId: Long,
 )
