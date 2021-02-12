@@ -6,5 +6,5 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import reactor.core.publisher.Flux
 
 interface ProductRepo : ReactiveCrudRepository<Product, Long> {
-    fun findAll(pageable: Pageable): Flux<Product>
+    fun findByIdNotNull(pageable: Pageable): Flux<Product>
 }
