@@ -48,6 +48,24 @@ class BrandController(val service: BrandService) {
         return service.findAll(PageRequest.of(page, size, direction, sort))
     }
 
+    @Operation(operationId = "getBrand", summary = "Получить бренд по идентификатору")
+    @ApiResponses(
+        value = [ApiResponse(
+            responseCode = "200",
+            description = "Чек",
+            content = [Content(
+                mediaType = "application/json",
+                schema = Schema(implementation = BrandDto::class)
+            )]
+        ), ApiResponse(
+            responseCode = "400",
+            description = "Ошибка в запросе"
+        ), ApiResponse(responseCode = "401", description = "Ошибка авторизации"), ApiResponse(
+            responseCode = "404",
+            description = "Бренд не найдена"
+        ), ApiResponse(responseCode = "500", description = "Внутренняя ошибка")]
+    )
+    @GetMapping(path = ["/{id}"])
     fun getBrand(@PathVariable id: Long?): Mono<BrandDto?>{
         return Mono.empty()
     }

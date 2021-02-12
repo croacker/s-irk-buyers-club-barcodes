@@ -49,6 +49,24 @@ class ProductCategoryController(val service: ProductCategoryService) {
         return service.findAll(PageRequest.of(page, size, direction, sort))
     }
 
+    @Operation(operationId = "getProductCategory", summary = "Получить категорию товаров по идентификатору")
+    @ApiResponses(
+        value = [ApiResponse(
+            responseCode = "200",
+            description = "Чек",
+            content = [Content(
+                mediaType = "application/json",
+                schema = Schema(implementation = ProductCategoryDto::class)
+            )]
+        ), ApiResponse(
+            responseCode = "400",
+            description = "Ошибка в запросе"
+        ), ApiResponse(responseCode = "401", description = "Ошибка авторизации"), ApiResponse(
+            responseCode = "404",
+            description = "Категорию товаров не найдена"
+        ), ApiResponse(responseCode = "500", description = "Внутренняя ошибка")]
+    )
+    @GetMapping(path = ["/{id}"])
     fun getProductCategory(@PathVariable id: Long): Mono<ProductCategoryDto?>{
         return service.findById(id)
     }
