@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
 import lombok.AllArgsConstructor
 import lombok.extern.slf4j.Slf4j
@@ -20,6 +21,7 @@ import reactor.core.publisher.Mono
 @AllArgsConstructor
 @Slf4j
 @Tag(name = "Barcode", description = "Штрихкод")
+@SecurityRequirement(name = "bearerAuth")
 class BarcodeController(val service: BarcodeService, val productService: ProductService) {
 
     @Operation(operationId = "getProductByBarcode", summary = "Получить товар по штрихкоду")
