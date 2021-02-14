@@ -19,6 +19,7 @@
 		<kotlin.version>1.4.30</kotlin.version>
 		<docker.image.name>croacker/${name}:${version}</docker.image.name>
 		<springdoc-openapi-webflux-ui.version>1.4.7</springdoc-openapi-webflux-ui.version>
+		<zxing.core.version>3.4.1</zxing.core.version>
 		<jib-maven-plugin.version>2.7.1</jib-maven-plugin.version>
 	</properties>
 
@@ -117,6 +118,20 @@
 			<version>${kotlin.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!--barcode-->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>${zxing.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>${zxing.core.version}</version>
+		</dependency>
+
+		<!--barcode-->
 
 		<!--swagger-->
 		<dependency>
