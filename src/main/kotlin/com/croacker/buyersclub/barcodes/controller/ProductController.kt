@@ -1,6 +1,7 @@
 package com.croacker.buyersclub.barcodes.controller
 
 import com.croacker.buyersclub.barcodes.service.ProductService
+import com.croacker.buyersclub.barcodes.service.dto.BrandDto
 import com.croacker.buyersclub.barcodes.service.dto.ProductDto
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
@@ -48,6 +49,24 @@ class ProductController(val service: ProductService) {
         return service.findAll(PageRequest.of(page, size, direction, sort))
     }
 
+    @Operation(operationId = "getProductCategory", summary = "Получить товар по идентификатору")
+    @ApiResponses(
+        value = [ApiResponse(
+            responseCode = "200",
+            description = "Чек",
+            content = [Content(
+                mediaType = "application/json",
+                schema = Schema(implementation = ProductDto::class)
+            )]
+        ), ApiResponse(
+            responseCode = "400",
+            description = "Ошибка в запросе"
+        ), ApiResponse(responseCode = "401", description = "Ошибка авторизации"), ApiResponse(
+            responseCode = "404",
+            description = "Товаров не найдена"
+        ), ApiResponse(responseCode = "500", description = "Внутренняя ошибка")]
+    )
+    @GetMapping(path = ["/{id}"])
     fun getProductCategory(@PathVariable id: Long): Mono<ProductDto?>{
         return service.findById(id)
     }
