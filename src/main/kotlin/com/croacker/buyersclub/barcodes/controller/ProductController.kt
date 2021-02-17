@@ -51,11 +51,11 @@ class ProductController(val service: ProductService) {
         return service.findAll(PageRequest.of(page, size, direction, sort))
     }
 
-    @Operation(operationId = "getProductCategory", summary = "Получить товар по идентификатору")
+    @Operation(operationId = "getProduct", summary = "Получить товар по идентификатору")
     @ApiResponses(
         value = [ApiResponse(
             responseCode = "200",
-            description = "Чек",
+            description = "Товар",
             content = [Content(
                 mediaType = "application/json",
                 schema = Schema(implementation = ProductDto::class)
@@ -65,7 +65,7 @@ class ProductController(val service: ProductService) {
             description = "Ошибка в запросе"
         ), ApiResponse(responseCode = "401", description = "Ошибка авторизации"), ApiResponse(
             responseCode = "404",
-            description = "Товаров не найдена"
+            description = "Товар не найдена"
         ), ApiResponse(responseCode = "500", description = "Внутренняя ошибка")]
     )
     @GetMapping(path = ["/{id}"])

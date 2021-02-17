@@ -55,7 +55,7 @@ class ProductCategoryController(val service: ProductCategoryService) {
     @ApiResponses(
         value = [ApiResponse(
             responseCode = "200",
-            description = "Чек",
+            description = "Категория товаров",
             content = [Content(
                 mediaType = "application/json",
                 schema = Schema(implementation = ProductCategoryDto::class)
@@ -65,7 +65,7 @@ class ProductCategoryController(val service: ProductCategoryService) {
             description = "Ошибка в запросе"
         ), ApiResponse(responseCode = "401", description = "Ошибка авторизации"), ApiResponse(
             responseCode = "404",
-            description = "Категорию товаров не найдена"
+            description = "Категория товаров не найдена"
         ), ApiResponse(responseCode = "500", description = "Внутренняя ошибка")]
     )
     @GetMapping(path = ["/{id}"])

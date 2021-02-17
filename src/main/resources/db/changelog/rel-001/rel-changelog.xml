@@ -7,4 +7,5 @@
     <include file="changelog/001-create-table-brand.xml" relativeToChangelogFile="true"/>
     <include file="changelog/002-create-table-product-category.xml" relativeToChangelogFile="true"/>
     <include file="changelog/003-create-table-product.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/004-create-table-users.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
